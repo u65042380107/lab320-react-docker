@@ -1,6 +1,6 @@
 import React from 'react'
 import './Create.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import {useNavigate, useParams} from 'react-router-dom'
 // const id = require(../../)
@@ -11,6 +11,9 @@ function Update() {
     const [lname,setlname] = useState('')
     const [phone,setphone] = useState('')
     const [major_id,setmajor_id] = useState('')
+    const [major,setmajor] = useState([])
+    // const [data,setdata] = useState([])
+
     const nav = useNavigate();
     const {id} = useParams();
 
@@ -23,22 +26,30 @@ function Update() {
             }
         ).catch(err=> console.log(err))
     }
+    useEffect(()=>{
+        // axios.get('http://localhost:5000/update/'+id).then(res=>setdata(res.data)).catch(err=>console.log(err))
+        // axios.get('http://localhost:5000/update/'+id).then(res=>console.log(res.data)).catch(err=>console.log(err))
+
+        // axios.get('http://localhost:5000/major').then(res=>setmajor(res.data)).catch(err=>console.log(err))
+        axios.get('http://localhost:5000/major').then(res=>setmajor(res.data)).catch(err=>console.log(err))
+    })
+
+
 
   return (
     <div className="create">
       <div className="container">
         <form onSubmit={handledata}>
             <h2>Update Student</h2>
-        <div className="mb-2">
+            <div className="mb-2">
             <label htmlFor="">First-Name</label>
             <input type="text" name="" id="" placeholder='Enter first-name' className="form-control"
-            onChange={e=> setfname(e.target.value)}/> 
-            {/* onChange={e=> setName(e.target.value)} */}
-        </div>
+            onChange={e=> setfname(e.target.value)} />
+            </div>
         <div className="mb-2">
             <label htmlFor="">Last-Name</label>
             <input type="text" name="" id="" placeholder='Enter last-name' className="form-control"
-            onChange={e=> setlname(e.target.value)}/> 
+            onChange={e=> setlname(e.target.value)} /> 
             {/* onChange={e=> setName(e.target.value)} */}
         </div>
         <div className="mb-2">
@@ -48,8 +59,11 @@ function Update() {
         </div>
         <div className="mb-2">
             <label htmlFor="">Major</label>
-            <input type="text" name="" id="" placeholder='Enter major' className="form-control"
-            onChange={e=> setmajor_id(e.target.value)}/>
+                <select name="" id="" onChange={e=> setmajor_id(e.target.value)} className="select">
+                    {major.map(d=>(
+                        <option className="option" key= {d.major_id} value={d.major_id}>{d.major_name}</option>
+                    ))}
+                </select>
         </div>
         <button className="btn-add">แก้ไข</button>
         </form>
