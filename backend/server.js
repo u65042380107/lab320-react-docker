@@ -28,7 +28,7 @@ app.get('/',(req,res)=>{
 
 app.get('/major',(req,res)=>{
     const sql = "SELECT * FROM `major`";
-    const id = req.params.id;
+    // const id = req.params.id;
     db.query(sql, (err, data)=>{
         if(err) return res.json(err);
         return res.json(data);
@@ -62,6 +62,15 @@ app.put('/update/:id',(req,res)=>{
     db.query(sql, [...values, id],(err, data)=>{
         if(err) return res.json(err);
         return res.json("updated");
+    })
+})
+app.get('/update/:id',(req,res)=>{
+    const sql = "SELECT * FROM `student` WHERE id = ?";
+    const id = req.params.id;
+
+    db.query(sql,[id], (err, data)=>{
+        if(err) return res.json(err);
+        return res.json(data);
     })
 })
 

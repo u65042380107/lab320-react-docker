@@ -15,7 +15,7 @@ services:
       MYSQL_PASSWORD: psw1234
       # MYSQL_ALLOW_EMPTY_PASSWORD: yes
     ports:
-      - 3307:3306
+      - 3306:3306
     volumes:
       - ./student.sql:/docker-entrypoint-initdb.d/student.sql
     # restart: always
