@@ -24,6 +24,7 @@ services:
       - mynetwork
   backend:
     build: ./backend/
+    image: u65042380107/docker-backend:latest
     ports:
       - 5000:5000
     depends_on:
@@ -37,6 +38,7 @@ services:
       - mynetwork
   frontend:
     build: ./frontend/
+    image: u65042380107/docker-frontend:latest
     ports:
       - 7243:3000
     environment:

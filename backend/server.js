@@ -19,7 +19,7 @@ const db = mysql.createConnection({
 })
 
 app.get('/',(req,res)=>{
-    const sql = "SELECT * FROM `student`";
+    const sql = "SELECT student.id, student.fname, student.lname, student.phone, major.major_name FROM student INNER JOIN major ON student.major_id = major.major_id;";
     db.query(sql, (err, data)=>{
         if(err) return res.json(err);
         return res.json(data);
