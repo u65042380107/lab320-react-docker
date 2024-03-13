@@ -7,9 +7,9 @@ import { Link, useNavigate } from 'react-router-dom';
 
 function Home() {
     const [data,setData] = useState([]);
-    const [major,setmajor] = useState([]);
+    // const [major,setmajor] = useState([]);
     useEffect(()=>{
-        axios.get('http://localhost:5000/major').then(res=>setmajor(res.data)).catch(err=>console.log(err))
+        // axios.get('http://localhost:5000/major').then(res=>setmajor(res.data)).catch(err=>console.log(err))
 
         axios.get('http://localhost:5000/').then(res=>setData(res.data)).catch(err=>console.log(err))
     })
@@ -40,7 +40,7 @@ function Home() {
                             <td>{d.id}</td>
                             <td>{d.fname} {d.lname}</td>
                             <td>{d.phone}</td>
-                            <td>{d.major_id}</td>
+                            <td>{d.major_name}</td>
                             <td>
                                 <Link to={`/update/${d.id}`} className="btn-sm" >แก้ไข</Link>
                                 <button onClick={e=> handleDelete(d.id)} className="btn-cc">ลบ</button>
